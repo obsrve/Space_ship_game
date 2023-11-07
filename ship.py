@@ -3,10 +3,10 @@ import pygame
 
 class Ship():
 
-    def __init__(self, ai_game):
+    def __init__(self, ai_games):
         """Initialization of the ship and his start position """
-        self.screen = ai_game.screen
-        self.screen_rect = ai_game.screen.get_rect()
+        self.screen = ai_games.screen
+        self.screen_rect = ai_games.screen.get_rect()
 
         # Download image and his rect
         self.image = pygame.image.load('alien_invasion\images\ship.bmp')

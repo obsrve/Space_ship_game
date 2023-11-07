@@ -1,5 +1,6 @@
 import sys
 import pygame
+
 from settings import Settings
 from ship import Ship
 
@@ -21,17 +22,21 @@ class AlienInvasion:
     def run_game(self):
         """Begin main cycle"""
         while True:
-            # watch  for event
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self._check_events()
+            self._update_screen()
 
-            # Install new screen on each copy
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
+    def _check_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
 
-            # show last screen
-            pygame.display.flip()
+    def _update_screen(self):
+        # Install new screen on each copy
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+
+        # show last screen
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
