@@ -3,10 +3,11 @@ import pygame
 
 class Ship():
 
-    def __init__(self, ai_games):
+    def __init__(self, ai_game):
         """Initialization of the ship and his start position """
-        self.screen = ai_games.screen
-        self.screen_rect = ai_games.screen.get_rect()
+        self.screen = ai_game.screen
+        self.settings = ai_game.settings
+        self.screen_rect = ai_game.screen.get_rect()
 
         # Download image and his rect
         self.image = pygame.image.load('alien_invasion\images\ship.bmp')
@@ -14,6 +15,23 @@ class Ship():
 
         # Create every new ship in bottom of the screen
         self.rect.midbottom = self.screen_rect.midbottom
+
+        # Save float value for ship horizontally
+        self.x = float(self.rect.x)
+
+        # Movement indicators
+        self.moving_right = False
+        self.moving_left = False
+
+    def update(self):
+        # Update ship.x value not a rect.
+        if self.moving_right and self.rect.right < self.screen_rect.right:
+            self.x += self.settings.ship_speed
+        if self.moving_left and self.rect.left > 0:
+            self.x -= self.settings.ship_speed
+
+        # Update rect from self.x
+        self.rect.x = self.x
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
