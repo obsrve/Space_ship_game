@@ -1,5 +1,5 @@
 import pygame
-from pygame.sprite import _Group, Sprite
+from pygame.sprite import Sprite
 
 
 class Bullet(Sprite):
@@ -19,3 +19,11 @@ class Bullet(Sprite):
 
         # save bullet position as decimal value
         self.y = float(self.rect.y)
+
+    def update(self):
+        self.y -= self.settings.bullet_speed
+        self.rect.y = self.y
+
+    def draw_bullet(self):
+        """Draw the bullet on the screen"""
+        pygame.draw.rect(self.screen, self.color, self.rect)
